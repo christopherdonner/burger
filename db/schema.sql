@@ -9,3 +9,5 @@ create table burgers
     devoured boolean,
     primary key (id)
 );
+
+insert into burgers (burgerName, devoured) values ("banquet burger", false)

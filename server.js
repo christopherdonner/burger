@@ -36,17 +36,18 @@ connection.connect(function(err) {
 
 // Use Handlebars to render the main index.html page with the burgers in it.
 app.get("/", function(req, res) {
-  connection.query("SELECT * FROM burgers;", function(err, data) {
+  connection.query("SELECT * FROM burgers where devoured=false;", function(err, data) {
     if (err) {
       return res.status(500).end();
     }
-
+    console.log(res.body)
     res.render("index", { burgers: data });
   });
 });
 
 // Create a new burger
 app.post("/Burgers", function(req, res) {
+    console.log(req, res)
   connection.query("INSERT INTO burgers (burger) VALUES (?)", [req.body.burger], function(err, result) {
     if (err) {
       return res.status(500).end();
