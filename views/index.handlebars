@@ -1,0 +1,114 @@
+<div class="jumbotron" style="background-image: url(https://cdn.shopify.com/s/files/1/1125/0582/products/BurgertimeMarquee_70c86e51-e8e6-4bc2-b756-4646843d0630_1024x1024.jpg?v=1539195353)">
+<h1 style="color: white; text-align:center">Burger Time!</h1>
+</div>
+
+<div class="container" >
+    <div class="row">
+        <div class="col-lg-4">
+<ul>
+  {{#each burgers}}
+    <li>
+      <p>
+        {{this.id}}. {{this.Burger}}
+
+        <button data-Burgerid="{{this.id}}" class="delBurger">Delete</button>
+      </p>
+    </li>
+  {{/each}}
+</ul>
+</div> {{!--end of column 1--}}
+<div class="col-lg-4">
+<h2>Eat-Da-Burger!</h2>
+<br>
+<form id="addBurger" class="button-size">
+	<textarea type="text" name="Burger"></textarea>
+</form>
+<div class="row">
+	<button type="submit" class="btn btn-primary">Save Burger!</button>
+</div>
+</div>
+<div class="col-lg-4">
+    <ul>
+  {{#each burgers}}
+    <li>
+      <p>
+        {{this.id}}. {{this.Burger}}
+
+        <button data-Burgerid="{{this.id}}" class="delBurger">Delete</button>
+      </p>
+    </li>
+  {{/each}}
+</ul>
+</div>
+{{!-- <h2>Update a Burger</h2>
+<form id="updateBurger" class="button-size">
+  <input type="text" name="id" placeholder="id">
+	<textarea type="text" name="Burger" placeholder="what do you want to update this Burger title to?"></textarea>
+	<button type="submit">Update Burger!</button>
+</form> --}}
+</div> {{!--end of row--}}
+<div class="row">
+    <div class="col-lg-12"></div>
+</div>
+</div> {{!-- end of container --}}
+
+<script type="text/javascript">
+  $(".delBurger").on("click", function(event) {
+    var id = $(this).data("Burgerid");
+
+    // Send the DELETE request.
+    $.ajax("/Burgers/" + id, {
+      type: "DELETE"
+    }).then(
+      function() {
+        console.log("deleted id ", id);
+        // Reload the page to get the updated list
+        location.reload();
+      }
+    );
+  });
+
+  $("#addBurger").on("submit", function(event) {
+    // Make sure to preventDefault on a submit event.
+    event.preventDefault();
+
+    var newBurger = {
+      Burger: $("#addBurger [name=Burger]").val().trim()
+    };
+
+    // Send the POST request.
+    $.ajax("/Burgers", {
+      type: "POST",
+      data: newBurger
+    }).then(
+      function() {
+        console.log("added new Burger");
+        // Reload the page to get the updated list
+        location.reload();
+      }
+    );
+  });
+
+  $("#updateBurger").on("submit", function(event) {
+    // Make sure to preventDefault on a submit event.
+    event.preventDefault();
+
+    var id = $("[name=id]").val().trim();
+
+    var updatedBurger = {
+      Burger: $("#updateBurger [name=Burger]").val().trim()
+    };
+
+    // Send the PUT request.
+    $.ajax("/Burgers/" + id, {
+      type: "PUT",
+      data: updatedBurger
+    }).then(
+      function() {
+        console.log("updated id ", id);
+        // Reload the page to get the updated list
+        location.reload();
+      }
+    );
+  });
+</script>
