@@ -1,4 +1,4 @@
-<div class="jumbotron" style="background-image: url(https://cdn.shopify.com/s/files/1/1125/0582/products/BurgertimeMarquee_70c86e51-e8e6-4bc2-b756-4646843d0630_1024x1024.jpg?v=1539195353)">
+<div class="jumbotron"  style="background-image: url(https://cdn.shopify.com/s/files/1/1125/0582/products/BurgertimeMarquee_70c86e51-e8e6-4bc2-b756-4646843d0630_1024x1024.jpg?v=1539195353); height: 400px">
 <h1 style="color: white; text-align:center">Burger Time!</h1>
 </div>
 
@@ -9,9 +9,9 @@
   {{#each burgers}}
     <li>
       <p>
-        {{this.id}}. {{this.Burger}}
+        {{this.id}}. {{this.burgerName}}
 
-        <button data-Burgerid="{{this.id}}" class="delBurger">Delete</button>
+        <button data-Burgerid="{{this.id}}" class="eatBurger">Devour</button>
       </p>
     </li>
   {{/each}}
@@ -29,12 +29,12 @@
 </div>
 <div class="col-lg-4">
     <ul>
-  {{#each burgers}}
+  {{#each oldBurgers}}
     <li>
       <p>
-        {{this.id}}. {{this.Burger}}
+        {{this.id}}. {{this.burgerName}}
 
-        <button data-Burgerid="{{this.id}}" class="delBurger">Delete</button>
+        {{!-- <button data-Burgerid="{{this.id}}" class="delBurger">Devour</button> --}}
       </p>
     </li>
   {{/each}}
@@ -53,12 +53,12 @@
 </div> {{!-- end of container --}}
 
 <script type="text/javascript">
-  $(".delBurger").on("click", function(event) {
+  $(".eatBurger").on("click", function(event) {
     var id = $(this).data("Burgerid");
 
     // Send the DELETE request.
     $.ajax("/Burgers/" + id, {
-      type: "DELETE"
+      type: "PUT"
     }).then(
       function() {
         console.log("deleted id ", id);
@@ -74,6 +74,7 @@
 
     var newBurger = {
       Burger: $("#addBurger [name=Burger]").val().trim()
+      console.log(Burger)
     };
 
     // Send the POST request.
