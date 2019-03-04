@@ -1,5 +1,5 @@
 <div class="jumbotron"  style="background-image: url(https://cdn.shopify.com/s/files/1/1125/0582/products/BurgertimeMarquee_70c86e51-e8e6-4bc2-b756-4646843d0630_1024x1024.jpg?v=1539195353); height: 400px">
-<h1 style="color: white; text-align:center">Burger Time!</h1>
+{{!-- <h1 style="color: white; text-align:center">Burger Time!</h1> --}}
 </div>
 
 <div class="container" >
@@ -11,7 +11,7 @@
       <p>
         {{this.id}}. {{this.burgerName}}
 
-        <button data-Burgerid="{{this.id}}" class="eatBurger">Devour</button>
+        <button data-Burgerid="{{this.id}}" id="eatBurger" class="btn btn-primary">Devour</button>
       </p>
     </li>
   {{/each}}
@@ -24,7 +24,7 @@
 	<textarea type="text" name="Burger"></textarea>
 </form>
 <div class="row">
-	<button type="submit" class="btn btn-primary">Save Burger!</button>
+	<button type="submit" class="btn btn-primary" id="burgerButton">Save Burger!</button>
 </div>
 </div>
 <div class="col-lg-4">
@@ -34,7 +34,7 @@
       <p>
         {{this.id}}. {{this.burgerName}}
 
-        {{!-- <button data-Burgerid="{{this.id}}" class="delBurger">Devour</button> --}}
+        <button data-Burgerid="{{this.id}}" id="delBurger" class="btn btn-warning">Delete</button>
       </p>
     </li>
   {{/each}}
@@ -53,22 +53,21 @@
 </div> {{!-- end of container --}}
 
 <script type="text/javascript">
-  $(".eatBurger").on("click", function(event) {
+  $("#addBurger").on("submit", function(event) {
     var id = $(this).data("Burgerid");
-
-    // Send the DELETE request.
+    console.log("eating burger")
     $.ajax("/Burgers/" + id, {
       type: "PUT"
     }).then(
       function() {
-        console.log("deleted id ", id);
+        console.log("devoured ", id);
         // Reload the page to get the updated list
         location.reload();
       }
     );
   });
 
-  $("#addBurger").on("submit", function(event) {
+  $("#burgerButton").on("click", function(event) {
     // Make sure to preventDefault on a submit event.
     event.preventDefault();
 

@@ -51,7 +51,7 @@ app.get("/", function(req, res) {
 // Create a new burger
 app.post("/Burgers", function(req, res) {
     console.log(req.body, res)
-  connection.query("INSERT INTO burgers (burger) VALUES (?)", [req.body.burgerName], function(err, result) {
+  connection.query("INSERT INTO burgers (burger) VALUES (?)", [req.body.Burger], function(err, result) {
     if (err) {
       return res.status(500).end();
     }
