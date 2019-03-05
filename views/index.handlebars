@@ -53,7 +53,7 @@
 </div> {{!-- end of container --}}
 
 <script type="text/javascript">
-  $("#addBurger").on("submit", function(event) {
+  $("#eatBurger").on("click", function(event) {
     var id = $(this).data("Burgerid");
     console.log("eating burger")
     $.ajax("/Burgers/" + id, {
