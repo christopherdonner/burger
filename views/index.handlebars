@@ -11,7 +11,7 @@
       <p>
         {{this.id}}. {{this.burgerName}}
 
-        <button data-Burgerid="{{this.id}}" id="eatBurger" class="btn btn-primary">Devour</button>
+        <button data-Burgerid="{{this.id}}" class="eatBurger">Devour</button>
       </p>
     </li>
   {{/each}}
@@ -34,7 +34,7 @@
       <p>
         {{this.id}}. {{this.burgerName}}
 
-        <button data-Burgerid="{{this.id}}" id="delBurger" class="btn btn-warning">Delete</button>
+        <button data-Burgerid="{{this.id}}" class="delBurger">Delete</button>
       </p>
     </li>
   {{/each}}
@@ -54,7 +54,7 @@
 
 <script type="text/javascript">
 //eat burgers
-  $("#eatBurger").on("click", function(event) {
+  $(".eatBurger").on("click", function(event) {
     var id = $(this).attr("data-burgerid")
     console.log(id)
     console.log("eating burger")
@@ -70,7 +70,7 @@
   });
 
 // delete burgers
-$("#delburger").on("click", function(event) {
+$(".delburger").on("click", function(event) {
     var id = $(this).attr("data-burgerid")
     console.log(`deleting ${id}`)
     // Send the DELETE request.
