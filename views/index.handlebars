@@ -53,8 +53,10 @@
 </div> {{!-- end of container --}}
 
 <script type="text/javascript">
+//eat burgers
   $("#eatBurger").on("click", function(event) {
-    var id = $(this).data("Burgerid");
+    var id = $(this).attr("data-burgerid")
+    console.log(id)
     console.log("eating burger")
     $.ajax("/Burgers/" + id, {
       type: "PUT"
@@ -67,6 +69,23 @@
     );
   });
 
+// delete burgers
+$("#delburger").on("click", function(event) {
+    var id = $(this).attr("data-burgerid")
+    console.log(`deleting ${id}`)
+    // Send the DELETE request.
+    $.ajax("/burgers/" + id, {
+      type: "DELETE"
+    }).then(
+      function() {
+        console.log("deleted id ", id);
+        // Reload the page to get the updated list
+        location.reload();
+      }
+    );
+  });
+
+// add burgers
   $("#burgerButton").on("click", function(event) {
     // Make sure to preventDefault on a submit event.
     event.preventDefault();
@@ -75,6 +94,7 @@
       Burger: $("#addBurger [name=Burger]").val().trim()
     };
 
+if(newBurger!=""){
     // Send the POST request.
     $.ajax("/Burgers", {
       type: "POST",
@@ -86,8 +106,9 @@
         location.reload();
       }
     );
+  }
   });
-
+/*
   $("#updateBurger").on("submit", function(event) {
     // Make sure to preventDefault on a submit event.
     event.preventDefault();
@@ -110,4 +131,5 @@
       }
     );
   });
+  */
 </script>

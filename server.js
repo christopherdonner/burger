@@ -75,7 +75,8 @@ app.get("/Burgers", function(req, res) {
 
 // Update a burger
 app.put("/Burgers/:id", function(req, res) {
-  connection.query("UPDATE burgers SET devoured = true WHERE id = ?", [true, req.params.id], function(err, result) {
+  console.log(req.params.id)
+  connection.query("UPDATE burgers SET devoured = true WHERE id = ?", [req.params.id], function(err, result) {
     if (err) {
       // If an error occurred, send a generic server failure
       return res.status(500).end();
