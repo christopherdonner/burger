@@ -11,3 +11,4 @@ create table burgers
 );
 
 insert into burgers (burgerName, devoured) values ("banquet burger", false)
+insert into burgers (burgerName, devoured) values ("cheese burger", true)

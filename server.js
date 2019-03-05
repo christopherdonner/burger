@@ -50,10 +50,10 @@ app.get("/", function(req, res) {
 
 // Create a new burger
 app.post("/Burgers", function(req, res) {
-    console.log(req.body, res)
-  connection.query("INSERT INTO burgers (burger) VALUES (?)", [req.body.Burger], function(err, result) {
+    console.log(req.body)
+  connection.query("INSERT INTO burgers (burgerName, devoured) VALUES (?, false)", [req.body.Burger], function(err, result) {
     if (err) {
-      return res.status(500).end();
+      return res.status(503).end();
     }
 
     // Send back the ID of the new burger
@@ -75,7 +75,7 @@ app.get("/Burgers", function(req, res) {
 
 // Update a burger
 app.put("/Burgers/:id", function(req, res) {
-  connection.query("UPDATE burgers SET burger = ? WHERE id = ?", [req.body.burger, req.params.id], function(err, result) {
+  connection.query("UPDATE burgers SET devoured = true WHERE id = ?", [true, req.params.id], function(err, result) {
     if (err) {
       // If an error occurred, send a generic server failure
       return res.status(500).end();
