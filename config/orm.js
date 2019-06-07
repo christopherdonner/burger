@@ -1,6 +1,3 @@
-// * `selectAll()`
-// * `insertOne()`
-// * `updateOne()`
 var connection = require("./connection.js");
 
 var orm = {
